@@ -20,9 +20,9 @@ class PostItem extends Component {
           />
         </div>
         <div>
-          <button>UpVote</button>
+          <button onClick={() => this.props.vote(this.props.id, true)}>UpVote</button>
           <span>{this.props.votes}</span>
-          <button>DownVote</button>
+          <button onClick={() => this.props.vote(this.props.id, false)}>DownVote</button>
         </div>
         <div>
           <h3><a href={this.url} target='_blank'>{this.props.title}</a></h3>
