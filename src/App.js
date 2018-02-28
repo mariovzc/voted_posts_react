@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import posts from './posts'
 import PostItem from './components/PostItem';
-
+let myPosts = []
 class App extends Component {
   constructor () {
     super()
@@ -9,6 +9,13 @@ class App extends Component {
       posts: [],
       order: 'ASC'
     }
+  }
+  vote (id, upVote) {
+    const vote = upVote ? 1 : -1
+    const newArr = myPosts.map(post => post.id === id ? 
+      {...post, votes: post.votes+=vote} :
+      post
+    )
   }
   render() {
     return (
@@ -20,12 +27,14 @@ class App extends Component {
             return (
               <PostItem
                 key={post.id}
+                id={post.id}
                 post_image_url={post.post_image_url}
                 votes={post.votes}
                 url={post.url}
                 title={post.title}
                 description={post.description}
                 writer_avatar_url={post.writer_avatar_url}
+                vote={this.vote}
               />
             )
           })}
@@ -37,6 +46,7 @@ class App extends Component {
     this.setState({
       posts: posts
     })
+    myPosts = posts
   }
 }
 
