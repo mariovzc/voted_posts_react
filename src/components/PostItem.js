@@ -20,19 +20,19 @@ class PostItem extends Component {
           />
         </div>
         <div>
-          <button onClick={() => this.props.vote(this.props.id, true)}>UpVote</button>
+          <button onClick={() => this.props.upVote(this.props.id, true)}>UpVote</button>
           <span>{this.props.votes}</span>
-          <button onClick={() => this.props.vote(this.props.id, false)}>DownVote</button>
+          <button onClick={() => this.props.downVote(this.props.id, false)}>DownVote</button>
         </div>
         <div>
           <h3><a href={this.url} target='_blank'>{this.props.title}</a></h3>
           <p>{this.props.description}</p>
           <small>
-            Escrito por: 
-            <img 
+            Escrito por:
+            <img
               src={this.props.writer_avatar_url}
               alt='AVATAR'
-             />
+            />
           </small>
         </div>
       </div>

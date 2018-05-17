@@ -1,25 +1,26 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import posts from './posts'
-import PostItem from './components/PostItem';
-let myPosts = []
+import PostItem from './components/PostItem'
+import Order from './order'
+
 class App extends Component {
   constructor () {
     super()
-    this.state= {
+    this.state = {
       posts: [],
       order: 'ASC'
     }
   }
   vote (id, upVote) {
-    const vote = upVote ? 1 : -1
-    const newArr = myPosts.map(post => post.id === id ? 
-      {...post, votes: post.votes+=vote} :
-      post
-    )
+    const vote = upVote === 1 ? 1 : -1
+    let newArr = this.state.posts.map(post => post.id === id ?  {...post, votes: post.votes+=vote} : post )
+    this.setState({
+      posts: newArr
+    })
   }
-  render() {
+  render () {
     return (
-      <div className="App">  
+      <div className='App'>  
         <h1>Blog posts populares</h1>
         <hr/>
         <div>
@@ -34,7 +35,8 @@ class App extends Component {
                 title={post.title}
                 description={post.description}
                 writer_avatar_url={post.writer_avatar_url}
-                vote={this.vote}
+                upVote={() => this.vote(post.id, 1)}
+                downVote={() => this.vote(post.id, -1)}
               />
             )
           })}
@@ -46,7 +48,6 @@ class App extends Component {
     this.setState({
       posts: posts
     })
-    myPosts = posts
   }
 }
 
