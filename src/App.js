@@ -7,7 +7,7 @@ import {
 import posts from './posts'
 import PostItem from './components/posts/PostItem'
 import order from './order'
-
+import OrderButtons from './components/order_buttons/OrderButtons'
 class App extends Component {
   constructor () {
     super()
@@ -24,9 +24,9 @@ class App extends Component {
       posts: newArr
     })
   }
-  setOrder (event) {
-    const postsOrder = event.target.value
+  setOrder (postsOrder) {
     let newArr = this._order(postsOrder, this.state.posts)
+    console.log(postsOrder)
     this.setState({
       posts: newArr,
       order: postsOrder
@@ -42,16 +42,11 @@ class App extends Component {
           <Col md={{ size: 10, offset: 1 }}>
             <h1 className='text-center'>Blog posts populares</h1>
             <hr />
-            <div className='text-center'>
-              <div className='btn-group btn-group-toggle' onChange={this.setOrder.bind(this)} data-toggle='buttons'>
-                <label className={this.state.order === 'ASC' ? 'btn btn btn-primary active' : 'btn btn-outline-primary'}>
-                  <input type='radio' value='ASC' name='order' /> Ascendente
-                </label>
-                <label className={this.state.order === 'DESC' ? 'btn btn btn-primary active' : 'btn btn-outline-primary'}>
-                  <input type='radio' value='DESC' name='order' /> Descendente
-                </label>
-              </div>
-            </div>
+            <OrderButtons
+              ascOrder={() => this.setOrder('ASC')}
+              descOrder={() => this.setOrder('DESC')}
+              status={this.state.order}
+            />
             {this.state.posts.map(post => {
               return (
                 <PostItem
