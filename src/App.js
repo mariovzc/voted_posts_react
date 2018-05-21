@@ -24,8 +24,8 @@ class App extends Component {
       posts: newArr
     })
   }
-  setOrder (event, arr, input = true) {
-    const postsOrder = input ? event.target.value : event
+  setOrder (event) {
+    const postsOrder = event.target.value
     let newArr = this._order(postsOrder, this.state.posts)
     this.setState({
       posts: newArr,
