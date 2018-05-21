@@ -1,6 +1,11 @@
 import React, { Component } from 'react'
+import { 
+  Container,
+  Row,
+  Col
+} from 'reactstrap'
 import posts from './posts'
-import PostItem from './components/PostItem'
+import PostItem from './components/posts/PostItem'
 import Order from './order'
 
 class App extends Component {
@@ -20,28 +25,30 @@ class App extends Component {
   }
   render () {
     return (
-      <div className='App'>  
-        <h1>Blog posts populares</h1>
-        <hr/>
-        <div>
-          {this.state.posts.map(post => {
-            return (
-              <PostItem
-                key={post.id}
-                id={post.id}
-                post_image_url={post.post_image_url}
-                votes={post.votes}
-                url={post.url}
-                title={post.title}
-                description={post.description}
-                writer_avatar_url={post.writer_avatar_url}
-                upVote={() => this.vote(post.id, 1)}
-                downVote={() => this.vote(post.id, -1)}
-              />
-            )
-          })}
-        </div>
-      </div>
+      <Container>
+        <Row>
+          <Col md={{ size: 10, offset: 1 }}>
+            <h1 className='text-center'>Blog posts populares</h1>
+            <hr />
+            {this.state.posts.map(post => {
+              return (
+                <PostItem
+                  key={post.id}
+                  id={post.id}
+                  post_image_url={post.post_image_url}
+                  votes={post.votes}
+                  url={post.url}
+                  title={post.title}
+                  description={post.description}
+                  writer_avatar_url={post.writer_avatar_url}
+                  upVote={() => this.vote(post.id, 1)}
+                  downVote={() => this.vote(post.id, -1)}
+                />
+              )
+            })}
+          </Col>          
+        </Row>
+      </Container>
     );
   }
   componentWillMount() {
